@@ -26,6 +26,66 @@ Data: The value or breadcrumb stored in the node.
 Next: A reference to the next node in the stack.
 BreadcrumbsStack Class
 This class provides methods to interact with the stack:
+Implementation
+Here is the implementation of the BreadcrumbsStack using a linked list in Python:
+
+python
+Copy code
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class BreadcrumbsStack:
+    def __init__(self):
+        self.top = None
+
+    def push(self, data):
+        new_node = Node(data)
+        new_node.next = self.top
+        self.top = new_node
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("Pop from empty stack")
+        data = self.top.data
+        self.top = self.top.next
+        return data
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("Peek from empty stack")
+        return self.top.data
+
+    def is_empty(self):
+        return self.top is None
+Usage Example
+Here is an example of how to use the BreadcrumbsStack class:
+
+python
+Copy code
+# Create a new BreadcrumbsStack
+breadcrumbs = BreadcrumbsStack()
+
+# Push some breadcrumbs onto the stack
+breadcrumbs.push("Home")
+breadcrumbs.push("Products")
+breadcrumbs.push("Electronics")
+breadcrumbs.push("Laptops")
+
+# Peek at the top breadcrumb
+print("Top breadcrumb:", breadcrumbs.peek())  # Output: Laptops
+
+# Pop breadcrumbs from the stack
+print("Popped breadcrumb:", breadcrumbs.pop())  # Output: Laptops
+print("Popped breadcrumb:", breadcrumbs.pop())  # Output: Electronics
+
+# Check if the stack is empty
+print("Is the stack empty?", breadcrumbs.is_empty())  # Output: False
+
+# Peek at the top breadcrumb again
+print("Top breadcrumb:", breadcrumbs.peek())  # Output: Products
+
 
 Push: Adds a new node to the top of the stack.
 Pop: Removes the node from the top of the stack and returns its data.
